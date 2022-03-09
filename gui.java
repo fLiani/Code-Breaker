@@ -1,18 +1,17 @@
 import javax.swing.*;
+import javax.swing.text.AttributeSet.ColorAttribute;
+
 import java.awt.*;
 import java.awt.event.*;
 import java.io.BufferedReader;
 
 public class gui
 {
-    private JFrame frame;
+    private JFrame window;
     private JPanel mainPanel;
     private JPanel colourMenu;
-    private JPanel centerPanel;
 
-    private BorderLayout mainLayout = new BorderLayout();
-    private GridLayout scoreLayout = new GridLayout();
-    private FlowLayout flow = new FlowLayout();
+    private BorderLayout border;
 
 
     private Picture red = new Picture("Colour_0.png");
@@ -37,43 +36,24 @@ public class gui
     private JButton i = new JButton(indigo);
     private JButton v = new JButton(violet);
 
-    private int buttonSize = 65;
-
+    int btnSize = 65;
 
     public gui()
     {
-        frame = new JFrame("Code Breaker! - By Fabrizio Liani");
+        window = new JFrame("Code Breaker!");
 
         mainPanel = new JPanel();
         colourMenu = new JPanel();
-        centerPanel = new JPanel();
 
-        frame.setContentPane(mainPanel);
+        mainPanel.setLayout(border = new BorderLayout());
 
-        frame.getContentPane().setBackground(Color.GRAY);
+        window.setContentPane(mainPanel);
+
         mainPanel.setBackground(Color.GRAY);
         colourMenu.setBackground(Color.GRAY);
-        centerPanel.setBackground(Color.GRAY);
 
-        frame.setSize(400, 680);
+        window.setSize(500, 700);
 
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        
-
-        for(int j = 0; j < 4; j++)
-        {
-            centerPanel.add(empty = new JButton(emptyImage));
-            empty.setPreferredSize(new Dimension(buttonSize, buttonSize));
-        }
-
-
-        r.setPreferredSize(new Dimension(buttonSize, buttonSize));
-        o.setPreferredSize(new Dimension(buttonSize, buttonSize));
-        y.setPreferredSize(new Dimension(buttonSize, buttonSize));
-        g.setPreferredSize(new Dimension(buttonSize, buttonSize));
-        b.setPreferredSize(new Dimension(buttonSize, buttonSize));
-        i.setPreferredSize(new Dimension(buttonSize, buttonSize));
-        v.setPreferredSize(new Dimension(buttonSize, buttonSize));
 
         colourMenu.add(r);
         colourMenu.add(o);
@@ -83,18 +63,22 @@ public class gui
         colourMenu.add(i);
         colourMenu.add(v);
 
-
-        mainPanel.setLayout(mainLayout);
+        r.setPreferredSize(new Dimension(btnSize, btnSize));
+        o.setPreferredSize(new Dimension(btnSize, btnSize));
+        y.setPreferredSize(new Dimension(btnSize, btnSize));
+        g.setPreferredSize(new Dimension(btnSize, btnSize));
+        b.setPreferredSize(new Dimension(btnSize, btnSize));
+        i.setPreferredSize(new Dimension(btnSize, btnSize));
+        v.setPreferredSize(new Dimension(btnSize, btnSize));
 
         mainPanel.add("South", colourMenu);
-        mainPanel.add("Center", centerPanel);
-        //mainPanel.add("East", row2);
-        //mainPanel.add("East", row3);
-        //mainPanel.add("East", row4);
-        //mainPanel.add("East", row5);
-        //mainPanel.add("East", row6);
 
 
-        frame.setVisible(true);
+
+        window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        window.setVisible(true);
+
     }
+
 }
