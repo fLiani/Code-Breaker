@@ -1,21 +1,18 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.BufferedReader;
 
 public class gui
 {
     private JFrame frame;
     private JPanel mainPanel;
     private JPanel colourMenu;
-    private JPanel row1;
-    private JPanel row2;
-    private JPanel row3;
-    private JPanel row4;
-    private JPanel row5;
-    private JPanel row6;
+    private JPanel centerPanel;
 
     private BorderLayout mainLayout = new BorderLayout();
     private GridLayout scoreLayout = new GridLayout();
+    private FlowLayout flow = new FlowLayout();
 
 
     private Picture red = new Picture("Colour_0.png");
@@ -31,9 +28,7 @@ public class gui
 
 
 
-    private JButton empty = new JButton(emptyImage);
-    //private JButton whiteTick = new JButton(whiteTickImage);
-    //private JButton blackTick = new JButton(blackTickImage);
+    private JButton empty;
     private JButton r = new JButton(red);
     private JButton o = new JButton(orange);
     private JButton y = new JButton(yellow);
@@ -42,6 +37,8 @@ public class gui
     private JButton i = new JButton(indigo);
     private JButton v = new JButton(violet);
 
+    private int buttonSize = 65;
+
 
     public gui()
     {
@@ -49,28 +46,34 @@ public class gui
 
         mainPanel = new JPanel();
         colourMenu = new JPanel();
+        centerPanel = new JPanel();
 
         frame.setContentPane(mainPanel);
 
         frame.getContentPane().setBackground(Color.GRAY);
+        mainPanel.setBackground(Color.GRAY);
+        colourMenu.setBackground(Color.GRAY);
+        centerPanel.setBackground(Color.GRAY);
 
-        frame.setSize(360,640);
+        frame.setSize(400, 680);
 
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
 
-        row1 = new JPanel();
-        row2 = new JPanel();
-        row3 = new JPanel();
-        row4 = new JPanel();
-        row5 = new JPanel();
-        row6 = new JPanel();
-
         for(int j = 0; j < 4; j++)
         {
-            row1.add(empty);
+            centerPanel.add(empty = new JButton(emptyImage));
+            empty.setPreferredSize(new Dimension(buttonSize, buttonSize));
         }
 
+
+        r.setPreferredSize(new Dimension(buttonSize, buttonSize));
+        o.setPreferredSize(new Dimension(buttonSize, buttonSize));
+        y.setPreferredSize(new Dimension(buttonSize, buttonSize));
+        g.setPreferredSize(new Dimension(buttonSize, buttonSize));
+        b.setPreferredSize(new Dimension(buttonSize, buttonSize));
+        i.setPreferredSize(new Dimension(buttonSize, buttonSize));
+        v.setPreferredSize(new Dimension(buttonSize, buttonSize));
 
         colourMenu.add(r);
         colourMenu.add(o);
@@ -82,15 +85,9 @@ public class gui
 
 
         mainPanel.setLayout(mainLayout);
-        row1.setLayout(scoreLayout);
-        row2.setLayout(scoreLayout);
-        row3.setLayout(scoreLayout);
-        row4.setLayout(scoreLayout);
-        row5.setLayout(scoreLayout);
-        row6.setLayout(scoreLayout);
 
         mainPanel.add("South", colourMenu);
-        mainPanel.add("East", row1);
+        mainPanel.add("Center", centerPanel);
         //mainPanel.add("East", row2);
         //mainPanel.add("East", row3);
         //mainPanel.add("East", row4);
