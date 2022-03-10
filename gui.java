@@ -1,17 +1,16 @@
 import javax.swing.*;
-import javax.swing.text.AttributeSet.ColorAttribute;
+import javax.swing.plaf.DimensionUIResource;
 
 import java.awt.*;
 import java.awt.event.*;
-import java.io.BufferedReader;
 
 public class gui
 {
     private JFrame window;
     private JPanel mainPanel;
     private JPanel colourMenu;
-
-    private BorderLayout border;
+    private JPanel guessPanel;
+    private JPanel scorePanel;
 
 
     private Picture red = new Picture("Colour_0.png");
@@ -36,6 +35,8 @@ public class gui
     private JButton i = new JButton(indigo);
     private JButton v = new JButton(violet);
 
+    private JButton[] row = new JButton[24];
+
     int btnSize = 65;
 
     public gui()
@@ -44,13 +45,18 @@ public class gui
 
         mainPanel = new JPanel();
         colourMenu = new JPanel();
+        guessPanel = new JPanel();
+        scorePanel = new JPanel();
 
-        mainPanel.setLayout(border = new BorderLayout());
+        mainPanel.setLayout(new BorderLayout());
+        guessPanel.setLayout(new FlowLayout());
 
         window.setContentPane(mainPanel);
 
         mainPanel.setBackground(Color.GRAY);
         colourMenu.setBackground(Color.GRAY);
+        guessPanel.setBackground(Color.GRAY);
+        scorePanel.setBackground(Color.GRAY);
 
         window.setSize(500, 700);
 
@@ -71,8 +77,23 @@ public class gui
         i.setPreferredSize(new Dimension(btnSize, btnSize));
         v.setPreferredSize(new Dimension(btnSize, btnSize));
 
-        mainPanel.add("South", colourMenu);
+        for(int j = 0; j < 4; j++)
+        {
+            row[j] = new JButton(emptyImage);
+            guessPanel.add(row[j]);
+            row[j].setPreferredSize(new Dimension(btnSize, btnSize));
+        }
 
+       // for(int x = 0; x < 24; x++)
+        //{
+          //  row[x] = new JButton(emptyImage);
+            //scorePanel.add(row[x]);
+        // }
+
+
+        mainPanel.add("South", colourMenu);
+        mainPanel.add("West", guessPanel);
+        mainPanel.add("Center", scorePanel);
 
 
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -80,5 +101,4 @@ public class gui
         window.setVisible(true);
 
     }
-
 }
