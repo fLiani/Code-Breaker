@@ -1,9 +1,9 @@
 import java.awt.*;
 import javax.swing.*;
 
-public class row
+public class Row
 {
-    private JPanel panel = new JPanel();
+    JPanel panel = new JPanel();
 
     private Picture empty = new Picture("Empty.png");
 
@@ -11,7 +11,7 @@ public class row
 
     private int bSize = 65;
 
-    public row()
+    public Row()
     {
         for(int i = 0; i < 4; i++)
         {
@@ -19,5 +19,10 @@ public class row
             panel.add(button[i]);
             button[i].setPreferredSize(new Dimension(bSize, bSize));
         }
+    }
+
+    public JPanel getRow()
+    {
+        return panel;
     }
 }
