@@ -10,8 +10,17 @@ public class Gui
     private JFrame window;
     private JPanel mainPanel;
     private JPanel colourMenu;
-    private JPanel guessPanel;
+    private JPanel block;
     private JPanel scorePanel;
+    private JPanel test;
+
+
+    private Row row = new Row();
+    private Row row1 = new Row();
+    private Row row2 = new Row();
+    private Row row3 = new Row();
+    private Row row4 = new Row();
+    private Row row5 = new Row();
 
 
     private Picture red = new Picture("Colour_0.png");
@@ -27,7 +36,6 @@ public class Gui
 
 
 
-    private JButton empty;
     private JButton r = new JButton(red);
     private JButton o = new JButton(orange);
     private JButton y = new JButton(yellow);
@@ -35,8 +43,6 @@ public class Gui
     private JButton b = new JButton(blue);
     private JButton i = new JButton(indigo);
     private JButton v = new JButton(violet);
-
-    private JButton[] row1 = new JButton[4];
 
     int btnSize = 65;
 
@@ -46,20 +52,22 @@ public class Gui
 
         mainPanel = new JPanel();
         colourMenu = new JPanel();
-        guessPanel = new JPanel();
+        block = new JPanel();
         scorePanel = new JPanel();
+        test = new JPanel();
 
         mainPanel.setLayout(new BorderLayout());
-        guessPanel.setLayout(new FlowLayout());
+        block.setLayout(new BoxLayout(block, BoxLayout.Y_AXIS));
 
-        window.setContentPane(mainPanel);
+        window.setContentPane(test);
 
         mainPanel.setBackground(Color.GRAY);
         colourMenu.setBackground(Color.GRAY);
-        guessPanel.setBackground(Color.GRAY);
+        block.setBackground(Color.GRAY);
         scorePanel.setBackground(Color.GRAY);
+        test.setBackground(Color.GRAY);
 
-        window.setSize(500, 700);
+        window.setSize(500, 760);
 
 
         colourMenu.add(r);
@@ -77,20 +85,20 @@ public class Gui
         b.setPreferredSize(new Dimension(btnSize, btnSize));
         i.setPreferredSize(new Dimension(btnSize, btnSize));
         v.setPreferredSize(new Dimension(btnSize, btnSize));
-
-        //for(int j = 0; j < 4; j++)
-        //{
-          //  row1[j] = new JButton(emptyImage);
-            //guessPanel.add(row1[j]);
-        //    row1[j].setPreferredSize(new Dimension(btnSize, btnSize));
-        //}
-
-        
         
 
         mainPanel.add("South", colourMenu);
-        mainPanel.add("West", guessPanel);
-        mainPanel.add("Center", Row panel1 = new row());
+
+        block.add(row.link);
+        block.add(row1.link);
+        block.add(row2.link);
+        block.add(row3.link);
+        block.add(row4.link);
+        block.add(row5.link);
+
+        block.add(mainPanel);
+
+        test.add(block);
 
 
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
