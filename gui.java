@@ -1,9 +1,7 @@
 import javax.sql.RowSetEvent;
 import javax.swing.*;
 import javax.swing.plaf.DimensionUIResource;
-
 import java.awt.*;
-import java.awt.event.*;
 
 public class Gui
 {
@@ -12,7 +10,7 @@ public class Gui
     private JPanel colourMenu;
     private JPanel block;
     private JPanel scorePanel;
-    private JPanel test;
+    private JPanel wholePanel;
 
 
     private Row row = new Row();
@@ -54,18 +52,18 @@ public class Gui
         colourMenu = new JPanel();
         block = new JPanel();
         scorePanel = new JPanel();
-        test = new JPanel();
+        wholePanel = new JPanel();
 
         mainPanel.setLayout(new BorderLayout());
         block.setLayout(new BoxLayout(block, BoxLayout.Y_AXIS));
 
-        window.setContentPane(test);
+        window.setContentPane(wholePanel);
 
         mainPanel.setBackground(Color.GRAY);
         colourMenu.setBackground(Color.GRAY);
         block.setBackground(Color.GRAY);
         scorePanel.setBackground(Color.GRAY);
-        test.setBackground(Color.GRAY);
+        wholePanel.setBackground(Color.GRAY);
 
         window.setSize(500, 760);
 
@@ -89,16 +87,16 @@ public class Gui
 
         mainPanel.add("South", colourMenu);
 
-        block.add(row.link);
-        block.add(row1.link);
-        block.add(row2.link);
-        block.add(row3.link);
-        block.add(row4.link);
-        block.add(row5.link);
+        block.add(row.getLink());
+        block.add(row1.getLink());
+        block.add(row2.getLink());
+        block.add(row3.getLink());
+        block.add(row4.getLink());
+        block.add(row5.getLink());
 
         block.add(mainPanel);
 
-        test.add(block);
+        wholePanel.add(block);
 
 
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
