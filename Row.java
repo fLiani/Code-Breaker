@@ -27,7 +27,7 @@ public class Row
         {
             button[j] = new JButton(empty);
             panel2.add(button[j]);
-            button[j].setPreferredSize(new Dimension(bSize, bSize));
+            button[j].setPreferredSize(new Dimension(bSize, 50));
         }
 
         panel2.setLayout(new GridLayout(2, 2));
