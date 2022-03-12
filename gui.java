@@ -1,10 +1,11 @@
+import javax.sql.RowSetEvent;
 import javax.swing.*;
 import javax.swing.plaf.DimensionUIResource;
 
 import java.awt.*;
 import java.awt.event.*;
 
-public class gui
+public class Gui
 {
     private JFrame window;
     private JPanel mainPanel;
@@ -35,11 +36,11 @@ public class gui
     private JButton i = new JButton(indigo);
     private JButton v = new JButton(violet);
 
-    private JButton[] row = new JButton[24];
+    private JButton[] row1 = new JButton[4];
 
     int btnSize = 65;
 
-    public gui()
+    public Gui()
     {
         window = new JFrame("Code Breaker!");
 
@@ -77,23 +78,19 @@ public class gui
         i.setPreferredSize(new Dimension(btnSize, btnSize));
         v.setPreferredSize(new Dimension(btnSize, btnSize));
 
-        for(int j = 0; j < 4; j++)
-        {
-            row[j] = new JButton(emptyImage);
-            guessPanel.add(row[j]);
-            row[j].setPreferredSize(new Dimension(btnSize, btnSize));
-        }
-
-       // for(int x = 0; x < 24; x++)
+        //for(int j = 0; j < 4; j++)
         //{
-          //  row[x] = new JButton(emptyImage);
-            //scorePanel.add(row[x]);
-        // }
+          //  row1[j] = new JButton(emptyImage);
+            //guessPanel.add(row1[j]);
+        //    row1[j].setPreferredSize(new Dimension(btnSize, btnSize));
+        //}
 
+        
+        
 
         mainPanel.add("South", colourMenu);
         mainPanel.add("West", guessPanel);
-        mainPanel.add("Center", scorePanel);
+        mainPanel.add("Center", Row panel1 = new row());
 
 
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
