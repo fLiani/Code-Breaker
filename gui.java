@@ -2,8 +2,9 @@ import javax.sql.RowSetEvent;
 import javax.swing.*;
 import javax.swing.plaf.DimensionUIResource;
 import java.awt.*;
+import java.awt.event.*;
 
-public class Gui
+public class Gui implements ActionListener
 {
     private JFrame window;
     private JPanel mainPanel;
@@ -19,6 +20,8 @@ public class Gui
     private Row row3 = new Row();
     private Row row4 = new Row();
     private Row row5 = new Row();
+
+    private Row[] rowArray = new Row[6];
 
 
     private Picture red = new Picture("Colour_0.png");
@@ -44,6 +47,9 @@ public class Gui
 
     int btnSize = 65;
 
+    int lineCounter = 0;
+    int guessCounter = 0;
+
     public Gui()
     {
         window = new JFrame("Code Breaker!");
@@ -65,8 +71,6 @@ public class Gui
         scorePanel.setBackground(Color.GRAY);
         wholePanel.setBackground(Color.GRAY);
 
-        window.setSize(500, 760);
-
 
         colourMenu.add(r);
         colourMenu.add(o);
@@ -83,6 +87,14 @@ public class Gui
         b.setPreferredSize(new Dimension(btnSize, btnSize));
         i.setPreferredSize(new Dimension(btnSize, btnSize));
         v.setPreferredSize(new Dimension(btnSize, btnSize));
+
+        r.addActionListener(this);
+        o.addActionListener(this);
+        y.addActionListener(this);
+        g.addActionListener(this);
+        b.addActionListener(this);
+        i.addActionListener(this);
+        v.addActionListener(this);
         
 
         mainPanel.add("South", colourMenu);
@@ -94,14 +106,82 @@ public class Gui
         block.add(row4.getLink());
         block.add(row5.getLink());
 
+
+        rowArray[0] = row5;
+        rowArray[1] = row4;
+        rowArray[2] = row3;
+        rowArray[3] = row2;
+        rowArray[4] = row1;
+        rowArray[5] = row;
+
+
         block.add(mainPanel);
 
         wholePanel.add(block);
-
 
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         window.setVisible(true);
 
+        window.setLocation(450, 30);
+
+        window.pack();
+    }
+
+    public void actionPerformed(ActionEvent e)
+    {
+        if(guessCounter > 3)
+        {
+            guessCounter = 0;
+            lineCounter++;
+        }
+
+        if(lineCounter > 5)
+        {
+            End endGame = new End();
+            window.dispose();
+        }
+
+        if(e.getSource() == r)
+        {
+            rowArray[lineCounter].rowButton[guessCounter].setIcon(red);
+            guessCounter++;
+        }
+
+        if(e.getSource() == o)
+        {
+            rowArray[lineCounter].rowButton[guessCounter].setIcon(orange);
+            guessCounter++;
+        }
+
+        if(e.getSource() == y)
+        {
+            rowArray[lineCounter].rowButton[guessCounter].setIcon(yellow);
+            guessCounter++;
+        }
+
+        if(e.getSource() == g)
+        {
+            rowArray[lineCounter].rowButton[guessCounter].setIcon(green);
+            guessCounter++;
+        }
+
+        if(e.getSource() == b)
+        {
+            rowArray[lineCounter].rowButton[guessCounter].setIcon(blue);
+            guessCounter++;
+        }
+
+        if(e.getSource() == i)
+        {
+            rowArray[lineCounter].rowButton[guessCounter].setIcon(indigo);
+            guessCounter++;
+        }
+
+        if(e.getSource() == v)
+        {
+            rowArray[lineCounter].rowButton[guessCounter].setIcon(violet);
+            guessCounter++;
+        }
     }
 }
