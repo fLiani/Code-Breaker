@@ -3,6 +3,7 @@ import javax.swing.*;
 import javax.swing.plaf.DimensionUIResource;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.Arrays;
 
 public class Gui implements ActionListener
 {
@@ -21,7 +22,7 @@ public class Gui implements ActionListener
     private Row row4 = new Row();
     private Row row5 = new Row();
 
-    private Row[] rowArray = new Row[6];
+    Row[] rowArray = new Row[6];
 
 
     private Picture red = new Picture("Colour_0.png");
@@ -35,6 +36,7 @@ public class Gui implements ActionListener
     private Picture whiteTickImage = new Picture("Score_1.png");
     private Picture blackTickImage = new Picture("Score_0.png");
 
+    private Picture[] colourArr = new Picture[7];
 
 
     private JButton r = new JButton(red);
@@ -49,6 +51,8 @@ public class Gui implements ActionListener
 
     int lineCounter = 0;
     int guessCounter = 0;
+
+    private Guess guessInstance = new Guess();
 
     public Gui()
     {
@@ -115,6 +119,15 @@ public class Gui implements ActionListener
         rowArray[5] = row;
 
 
+        colourArr[0] = red;
+        colourArr[1] = orange;
+        colourArr[2] = yellow;
+        colourArr[3] = green;
+        colourArr[4] = blue;
+        colourArr[5] = indigo;
+        colourArr[6] = violet;
+
+
         block.add(mainPanel);
 
         wholePanel.add(block);
@@ -142,46 +155,94 @@ public class Gui implements ActionListener
             window.dispose();
         }
 
+        if(guessCounter == 3)
+        {
+            if(Arrays.equals(guessInstance.guessArray, guessInstance.combination))
+            {
+                for(int j = 0; j < 4; j++)
+                {
+                    rowArray[lineCounter].gridButton[j].setIcon(blackTickImage);
+                    System.out.println("Combination: " + guessInstance.combination[j]);
+                    System.out.println("Guess: " + guessInstance.guessArray[j]);
+                }
+            }
+        }
+
         if(e.getSource() == r)
         {
-            rowArray[lineCounter].rowButton[guessCounter].setIcon(red);
+            rowArray[lineCounter].rowButton[guessCounter].setIcon(colourArr[0]);
+            guessInstance.guessArray[guessCounter] = 0;
             guessCounter++;
+            System.out.println("Element 0 " + guessInstance.guessArray[0]);
+            System.out.println("Element 1 " + guessInstance.guessArray[1]);
+            System.out.println("Element 2 " + guessInstance.guessArray[2]);
+            System.out.println("Element 3 " + guessInstance.guessArray[3]);
         }
 
         if(e.getSource() == o)
         {
-            rowArray[lineCounter].rowButton[guessCounter].setIcon(orange);
+            rowArray[lineCounter].rowButton[guessCounter].setIcon(colourArr[1]);
+            guessInstance.guessArray[guessCounter] = 1;
             guessCounter++;
+            System.out.println("Element 0 " + guessInstance.guessArray[0]);
+            System.out.println("Element 1 " + guessInstance.guessArray[1]);
+            System.out.println("Element 2 " + guessInstance.guessArray[2]);
+            System.out.println("Element 3 " + guessInstance.guessArray[3]);
         }
 
         if(e.getSource() == y)
         {
-            rowArray[lineCounter].rowButton[guessCounter].setIcon(yellow);
+            rowArray[lineCounter].rowButton[guessCounter].setIcon(colourArr[2]);
+            guessInstance.guessArray[guessCounter] = 2;
             guessCounter++;
+            System.out.println("Element 0 " + guessInstance.guessArray[0]);
+            System.out.println("Element 1 " + guessInstance.guessArray[1]);
+            System.out.println("Element 2 " + guessInstance.guessArray[2]);
+            System.out.println("Element 3 " + guessInstance.guessArray[3]);
         }
 
         if(e.getSource() == g)
         {
-            rowArray[lineCounter].rowButton[guessCounter].setIcon(green);
+            rowArray[lineCounter].rowButton[guessCounter].setIcon(colourArr[3]);
+            guessInstance.guessArray[guessCounter] = 3;
             guessCounter++;
+            System.out.println("Element 0 " + guessInstance.guessArray[0]);
+            System.out.println("Element 1 " + guessInstance.guessArray[1]);
+            System.out.println("Element 2 " + guessInstance.guessArray[2]);
+            System.out.println("Element 3 " + guessInstance.guessArray[3]);
         }
 
         if(e.getSource() == b)
         {
-            rowArray[lineCounter].rowButton[guessCounter].setIcon(blue);
+            rowArray[lineCounter].rowButton[guessCounter].setIcon(colourArr[4]);
+            guessInstance.guessArray[guessCounter] = 4;
             guessCounter++;
+            System.out.println("Element 0 " + guessInstance.guessArray[0]);
+            System.out.println("Element 1 " + guessInstance.guessArray[1]);
+            System.out.println("Element 2 " + guessInstance.guessArray[2]);
+            System.out.println("Element 3 " + guessInstance.guessArray[3]);
         }
 
         if(e.getSource() == i)
         {
-            rowArray[lineCounter].rowButton[guessCounter].setIcon(indigo);
+            rowArray[lineCounter].rowButton[guessCounter].setIcon(colourArr[5]);
+            guessInstance.guessArray[guessCounter] = 5;
             guessCounter++;
+            System.out.println("Element 0 " + guessInstance.guessArray[0]);
+            System.out.println("Element 1 " + guessInstance.guessArray[1]);
+            System.out.println("Element 2 " + guessInstance.guessArray[2]);
+            System.out.println("Element 3 " + guessInstance.guessArray[3]);
         }
 
         if(e.getSource() == v)
         {
-            rowArray[lineCounter].rowButton[guessCounter].setIcon(violet);
+            rowArray[lineCounter].rowButton[guessCounter].setIcon(colourArr[6]);
+            guessInstance.guessArray[guessCounter] = 6;
             guessCounter++;
+            System.out.println("Element 0 " + guessInstance.guessArray[0]);
+            System.out.println("Element 1 " + guessInstance.guessArray[1]);
+            System.out.println("Element 2 " + guessInstance.guessArray[2]);
+            System.out.println("Element 3 " + guessInstance.guessArray[3]);
         }
     }
 }
