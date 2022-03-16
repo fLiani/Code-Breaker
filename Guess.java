@@ -1,28 +1,30 @@
 import javax.swing.*;
 import java.awt.*;
-
+import java.util.Random;
+import java.util.Random.*;
 
 public class Guess
 {
-    private Picture empty = new Picture("Empty.png");
+    JButton correctPosition;
+    JButton correctColour;
 
-    private JButton[] button = new JButton[4];
+    int guessArray[] = new int[5];
+    int combination[] = new int[5];
 
-    private JPanel panel = new JPanel();
+    Picture colour = new Picture("Score_0.png");
+    Picture position = new Picture("Score_1.png");
 
-    public Guess()
+    private Random code = new Random();
+
+    public void codeGen()
     {
         for(int i = 0; i < 4; i++)
         {
-            button[i] = new JButton(empty);
-            panel.add(button[i]);
-            button[i].setPreferredSize(new Dimension(62, 62));
+            combination[i] = code.nextInt(7);
         }
+        System.out.println("Comb Elem 0: " + combination[0]);
+        System.out.println("Comb Elem 1: " + combination[1]);
+        System.out.println("Comb Elem 2: " + combination[2]);
+        System.out.println("Comb Elem 3: " + combination[3] + "\n");
     }
-
-    public JPanel getPanel()
-    {
-        return panel;
-    }
- 
 }
