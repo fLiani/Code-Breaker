@@ -8,9 +8,9 @@ public class End
 
     public End()
     {
-        endFrame = new JFrame("Thanks for playing!!");
+        endFrame = new JFrame("You ran out of guesses :(");
         endPanel = new JPanel();
-        endLabel = new JLabel("Thanks for playing!!");
+        endLabel = new JLabel("You ran out of guesses :(");
 
         endFrame.setContentPane(endPanel);
 
