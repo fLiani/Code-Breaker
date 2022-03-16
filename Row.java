@@ -2,9 +2,7 @@ import java.awt.*;
 import javax.swing.*;
 import javax.swing.text.AttributeSet.ColorAttribute;
 
-import java.awt.event.*;
-
-public class Row implements ActionListener
+public class Row
 {
     private JPanel panel = new JPanel();
     private JPanel panel2 = new JPanel();
@@ -15,7 +13,7 @@ public class Row implements ActionListener
 
     JButton[] rowButton = new JButton[5];
 
-    private JButton[] gridButton = new JButton[4];
+    JButton[] gridButton = new JButton[4];
 
     public Row()
     {
@@ -30,7 +28,7 @@ public class Row implements ActionListener
         {
             rowButton[i] = new JButton(empty);
             panel.add(rowButton[i]);
-            rowButton[i].setPreferredSize(new Dimension(62, 62));
+            rowButton[i].setPreferredSize(new Dimension(61, 61));
         }
 
         panel2.setLayout(new GridLayout(2, 2));
@@ -50,10 +48,5 @@ public class Row implements ActionListener
     public JPanel getLink()
     {
         return link;
-    }
-
-    public void actionPerformed(ActionEvent event)
-    {
-
     }
 }
