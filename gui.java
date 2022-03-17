@@ -4,10 +4,11 @@ import javax.swing.plaf.DimensionUIResource;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.Arrays;
+import java.util.Random;
 
 public class Gui implements ActionListener
-{
-    private JFrame window;
+{                                                                                                      // Declaring the basis of the GUI window:
+    private JFrame window;                                                          
     private JPanel mainPanel;
     private JPanel colourMenu;
     private JPanel block;
@@ -15,14 +16,14 @@ public class Gui implements ActionListener
     private JPanel wholePanel;
 
 
-    private Row row = new Row();
+    private Row row = new Row();                                                                       // Creating 6 instances of the class row -- puts in 6 rows on the panel
     private Row row1 = new Row();
     private Row row2 = new Row();
     private Row row3 = new Row();
     private Row row4 = new Row();
     private Row row5 = new Row();
 
-    Row[] rowArray = new Row[6];
+    Row[] rowArray = new Row[6];                                                                       // Creating an array for the 6 rows
 
 
     private Picture red = new Picture("Colour_0.png");
@@ -51,8 +52,10 @@ public class Gui implements ActionListener
 
     int lineCounter = 0;
     int guessCounter = 0;
+    int counter = 0;
 
-    private Guess guessInstance = new Guess();
+    int guessArray[] = new int[4];
+    int combination[] = new int[4];
 
     public Gui()
     {
@@ -139,11 +142,102 @@ public class Gui implements ActionListener
         window.setLocation(450, 30);
 
         window.pack();
+
+        codeGen();
     }
 
     public void actionPerformed(ActionEvent e)
     {
-        if(guessCounter > 3)
+        if(e.getSource() == r)
+        {
+            guessArray[guessCounter] = 0;
+            rowArray[lineCounter].rowButton[guessCounter].setIcon(colourArr[0]);
+            guessCounter++;
+            counter++;
+            System.out.println("Element 0 " + guessArray[0]);
+            System.out.println("Element 1 " + guessArray[1]);
+            System.out.println("Element 2 " + guessArray[2]);
+            System.out.println("Element 3 " + guessArray[3]);
+        }
+
+        if(e.getSource() == o)
+        {
+            guessArray[guessCounter] = 1;
+            rowArray[lineCounter].rowButton[guessCounter].setIcon(colourArr[1]);
+            guessCounter++;
+            counter++;
+            System.out.println("Element 0 " + guessArray[0]);
+            System.out.println("Element 1 " + guessArray[1]);
+            System.out.println("Element 2 " + guessArray[2]);
+            System.out.println("Element 3 " + guessArray[3]);
+        }
+
+        if(e.getSource() == y)
+        {
+            guessArray[guessCounter] = 2;
+            rowArray[lineCounter].rowButton[guessCounter].setIcon(colourArr[2]);
+            guessCounter++;
+            counter++;
+            System.out.println("Element 0 " + guessArray[0]);
+            System.out.println("Element 1 " + guessArray[1]);
+            System.out.println("Element 2 " + guessArray[2]);
+            System.out.println("Element 3 " + guessArray[3]);
+        }
+
+        if(e.getSource() == g)
+        {
+            guessArray[guessCounter] = 3;
+            rowArray[lineCounter].rowButton[guessCounter].setIcon(colourArr[3]);
+            guessCounter++;
+            counter++;
+            System.out.println("Element 0 " + guessArray[0]);
+            System.out.println("Element 1 " + guessArray[1]);
+            System.out.println("Element 2 " + guessArray[2]);
+            System.out.println("Element 3 " + guessArray[3]);
+        }
+
+        if(e.getSource() == b)
+        {
+            guessArray[guessCounter] = 4;
+            rowArray[lineCounter].rowButton[guessCounter].setIcon(colourArr[4]);
+            guessCounter++;
+            counter++;
+            System.out.println("Element 0 " + guessArray[0]);
+            System.out.println("Element 1 " + guessArray[1]);
+            System.out.println("Element 2 " + guessArray[2]);
+            System.out.println("Element 3 " + guessArray[3]);
+        }
+
+        if(e.getSource() == i)
+        {
+            guessArray[guessCounter] = 5;
+            rowArray[lineCounter].rowButton[guessCounter].setIcon(colourArr[5]);
+            guessCounter++;
+            counter++;
+            System.out.println("Element 0 " + guessArray[0]);
+            System.out.println("Element 1 " + guessArray[1]);
+            System.out.println("Element 2 " + guessArray[2]);
+            System.out.println("Element 3 " + guessArray[3]);
+        }
+
+        if(e.getSource() == v)
+        {
+            guessArray[guessCounter] = 6;
+            rowArray[lineCounter].rowButton[guessCounter].setIcon(colourArr[6]);
+            guessCounter++;
+            counter++;
+            System.out.println("Element 0 " + guessArray[0]);
+            System.out.println("Element 1 " + guessArray[1]);
+            System.out.println("Element 2 " + guessArray[2]);
+            System.out.println("Element 3 " + guessArray[3]);
+        }
+
+        if(counter > 3)
+        {
+            winChecker();
+        }
+
+        if(guessCounter == 4)
         {
             guessCounter = 0;
             lineCounter++;
@@ -154,95 +248,42 @@ public class Gui implements ActionListener
             End endGame = new End();
             window.dispose();
         }
+    }
 
-        if(guessCounter == 3)
+    public void winChecker()
+    {
+        if(Arrays.equals(guessArray, combination))
         {
-            if(Arrays.equals(guessInstance.guessArray, guessInstance.combination))
+            for(int j = 0; j < 4; j++)
             {
-                for(int j = 0; j < 4; j++)
-                {
-                    rowArray[lineCounter].gridButton[j].setIcon(blackTickImage);
-                    System.out.println("Combination: " + guessInstance.combination[j]);
-                    System.out.println("Guess: " + guessInstance.guessArray[j]);
-                }
+                rowArray[lineCounter].gridButton[j].setIcon(blackTickImage);
             }
         }
-
-        if(e.getSource() == r)
-        {
-            rowArray[lineCounter].rowButton[guessCounter].setIcon(colourArr[0]);
-            guessInstance.guessArray[guessCounter] = 0;
-            guessCounter++;
-            System.out.println("Element 0 " + guessInstance.guessArray[0]);
-            System.out.println("Element 1 " + guessInstance.guessArray[1]);
-            System.out.println("Element 2 " + guessInstance.guessArray[2]);
-            System.out.println("Element 3 " + guessInstance.guessArray[3]);
-        }
-
-        if(e.getSource() == o)
-        {
-            rowArray[lineCounter].rowButton[guessCounter].setIcon(colourArr[1]);
-            guessInstance.guessArray[guessCounter] = 1;
-            guessCounter++;
-            System.out.println("Element 0 " + guessInstance.guessArray[0]);
-            System.out.println("Element 1 " + guessInstance.guessArray[1]);
-            System.out.println("Element 2 " + guessInstance.guessArray[2]);
-            System.out.println("Element 3 " + guessInstance.guessArray[3]);
-        }
-
-        if(e.getSource() == y)
-        {
-            rowArray[lineCounter].rowButton[guessCounter].setIcon(colourArr[2]);
-            guessInstance.guessArray[guessCounter] = 2;
-            guessCounter++;
-            System.out.println("Element 0 " + guessInstance.guessArray[0]);
-            System.out.println("Element 1 " + guessInstance.guessArray[1]);
-            System.out.println("Element 2 " + guessInstance.guessArray[2]);
-            System.out.println("Element 3 " + guessInstance.guessArray[3]);
-        }
-
-        if(e.getSource() == g)
-        {
-            rowArray[lineCounter].rowButton[guessCounter].setIcon(colourArr[3]);
-            guessInstance.guessArray[guessCounter] = 3;
-            guessCounter++;
-            System.out.println("Element 0 " + guessInstance.guessArray[0]);
-            System.out.println("Element 1 " + guessInstance.guessArray[1]);
-            System.out.println("Element 2 " + guessInstance.guessArray[2]);
-            System.out.println("Element 3 " + guessInstance.guessArray[3]);
-        }
-
-        if(e.getSource() == b)
-        {
-            rowArray[lineCounter].rowButton[guessCounter].setIcon(colourArr[4]);
-            guessInstance.guessArray[guessCounter] = 4;
-            guessCounter++;
-            System.out.println("Element 0 " + guessInstance.guessArray[0]);
-            System.out.println("Element 1 " + guessInstance.guessArray[1]);
-            System.out.println("Element 2 " + guessInstance.guessArray[2]);
-            System.out.println("Element 3 " + guessInstance.guessArray[3]);
-        }
-
-        if(e.getSource() == i)
-        {
-            rowArray[lineCounter].rowButton[guessCounter].setIcon(colourArr[5]);
-            guessInstance.guessArray[guessCounter] = 5;
-            guessCounter++;
-            System.out.println("Element 0 " + guessInstance.guessArray[0]);
-            System.out.println("Element 1 " + guessInstance.guessArray[1]);
-            System.out.println("Element 2 " + guessInstance.guessArray[2]);
-            System.out.println("Element 3 " + guessInstance.guessArray[3]);
-        }
-
-        if(e.getSource() == v)
-        {
-            rowArray[lineCounter].rowButton[guessCounter].setIcon(colourArr[6]);
-            guessInstance.guessArray[guessCounter] = 6;
-            guessCounter++;
-            System.out.println("Element 0 " + guessInstance.guessArray[0]);
-            System.out.println("Element 1 " + guessInstance.guessArray[1]);
-            System.out.println("Element 2 " + guessInstance.guessArray[2]);
-            System.out.println("Element 3 " + guessInstance.guessArray[3]);
-        }
     }
+
+    public void colourChecker()
+    {
+        
+    }
+
+    public void posChecker()
+    {
+
+    }
+
+    public void codeGen()
+    {
+        Random r = new Random();
+
+        for(int i = 0; i < 4; i++)
+        {
+            combination[i] = r.nextInt(7);
+        }
+
+        System.out.println("Comb Elem 0: " + combination[0]);
+        System.out.println("Comb Elem 1: " + combination[1]);
+        System.out.println("Comb Elem 2: " + combination[2]);
+        System.out.println("Comb Elem 3: " + combination[3] + "\n");
+    }
+
 }
