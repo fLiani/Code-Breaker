@@ -1,3 +1,4 @@
+import javax.sound.sampled.SourceDataLine;
 import javax.swing.*;
 import java.awt.*;
 import java.util.Random;
@@ -8,8 +9,7 @@ public class Guess
     JButton correctPosition;
     JButton correctColour;
 
-    int guessArray[] = new int[5];
-    int combination[] = new int[5];
+    Gui gui = new Gui();
 
     Picture colour = new Picture("Score_0.png");
     Picture position = new Picture("Score_1.png");
@@ -20,11 +20,12 @@ public class Guess
     {
         for(int i = 0; i < 4; i++)
         {
-            combination[i] = code.nextInt(7);
+            gui.combination[i] = code.nextInt(7);
         }
-        System.out.println("Comb Elem 0: " + combination[0]);
-        System.out.println("Comb Elem 1: " + combination[1]);
-        System.out.println("Comb Elem 2: " + combination[2]);
-        System.out.println("Comb Elem 3: " + combination[3] + "\n");
+
+        System.out.println("Comb Elem 0: " + gui.combination[0]);
+        System.out.println("Comb Elem 1: " + gui.combination[1]);
+        System.out.println("Comb Elem 2: " + gui.combination[2]);
+        System.out.println("Comb Elem 3: " + gui.combination[3] + "\n");
     }
 }
