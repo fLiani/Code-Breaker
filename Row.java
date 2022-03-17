@@ -11,7 +11,7 @@ public class Row
 
     private Picture empty = new Picture("Empty.png");
 
-    JButton[] rowButton = new JButton[5];
+    JButton[] rowButton = new JButton[4];
 
     JButton[] gridButton = new JButton[4];
 
@@ -24,7 +24,7 @@ public class Row
             gridButton[j].setPreferredSize(new Dimension(90, 50));
         }
 
-        for(int i = 0; i < rowButton.length - 1; i++)
+        for(int i = 0; i < rowButton.length; i++)
         {
             rowButton[i] = new JButton(empty);
             panel.add(rowButton[i]);
