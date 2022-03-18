@@ -3,7 +3,9 @@ import javax.swing.*;
 import javax.swing.plaf.DimensionUIResource;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Random;
 
 public class Gui implements ActionListener
@@ -53,9 +55,13 @@ public class Gui implements ActionListener
     int lineCounter = 0;
     int guessCounter = 0;
     int counter = 0;
+    int checkCounter = 0;
 
     int guessArray[] = new int[4];
     int combination[] = new int[4];
+
+    int tempGuess[] = new int[4];
+    int tempComb[] = new int[4];
 
     public Gui()
     {
@@ -240,6 +246,7 @@ public class Gui implements ActionListener
         if(guessCounter == 4)
         {
             guessCounter = 0;
+            counter = 0;
             lineCounter++;
         }
 
@@ -247,6 +254,7 @@ public class Gui implements ActionListener
         {
             End endGame = new End();
             window.dispose();
+            endGame.lose();
         }
     }
 
@@ -258,17 +266,119 @@ public class Gui implements ActionListener
             {
                 rowArray[lineCounter].gridButton[j].setIcon(blackTickImage);
             }
+
+            End w = new End();
+
+            w.win();
+        }
+        else if(Arrays.equals(guessArray, combination) == false)
+        {
+            posChecker();
         }
     }
 
     public void colourChecker()
     {
-        
+        if(rowArray[lineCounter].gridButton[checkCounter].getIcon() == blackTickImage)
+        {
+            //do nothing
+        }
+
+        for(int cc = 0; cc < 4; cc++)
+        {
+            if(guessArray[0] != combination[0] && guessArray[0] == combination[cc])
+            {
+                rowArray[lineCounter].gridButton[checkCounter].setIcon(whiteTickImage);
+                checkCounter++;
+                System.out.println("0 is in the array");
+            }
+
+            if(guessArray[1] != combination[1] && guessArray[1] == combination[cc])
+            {
+                if(guessArray[1] == guessArray[0])
+                {
+                    //do nothing
+                }
+
+                else
+                {
+                    rowArray[lineCounter].gridButton[checkCounter].setIcon(whiteTickImage);
+                    checkCounter++;
+                    System.out.println("1 is in the array");
+                }
+            }
+
+            if(guessArray[2] != combination[2] && guessArray[2] == combination[cc])
+            {
+                if(guessArray[2] == guessArray[0] || guessArray[2] == guessArray[1])
+                {
+                    //do nothing
+                }
+
+                else
+                {
+                    rowArray[lineCounter].gridButton[checkCounter].setIcon(whiteTickImage);
+                    checkCounter++;
+                    System.out.println("2 is in the array");
+                }
+            }
+
+            if(guessArray[3] != combination[3] && guessArray[3] == combination[cc])
+            {
+                if(guessArray[3] == guessArray[0] || guessArray[3] == guessArray[1] || guessArray[3] == guessArray[2])
+                {
+                    //do nothing
+                }
+
+                else
+                {
+                    rowArray[lineCounter].gridButton[checkCounter].setIcon(whiteTickImage);
+                    checkCounter++;
+                    System.out.println("3 is in the array");
+                }
+            }
+        }
+        if(guessCounter == 4)
+        {
+            checkCounter = 0;
+        }
     }
 
     public void posChecker()
     {
+            if(guessArray[0] == combination[0])
+            {
+                rowArray[lineCounter].gridButton[checkCounter].setIcon(blackTickImage);
+                checkCounter++;
+            }
 
+            if(guessArray[1] == combination[1])
+            {
+                rowArray[lineCounter].gridButton[checkCounter].setIcon(blackTickImage);
+                checkCounter++;
+            }
+
+            if(guessArray[2] == combination[2])
+            {
+                rowArray[lineCounter].gridButton[checkCounter].setIcon(blackTickImage);
+                checkCounter++;
+            }
+
+            if(guessArray[3] == combination[3])
+            {
+                rowArray[lineCounter].gridButton[checkCounter].setIcon(blackTickImage);
+                checkCounter++;
+            }
+
+            else
+            {
+                colourChecker();
+            }
+
+            if(guessCounter == 4)
+            {
+                checkCounter = 0;
+            }
     }
 
     public void codeGen()
@@ -284,6 +394,11 @@ public class Gui implements ActionListener
         System.out.println("Comb Elem 1: " + combination[1]);
         System.out.println("Comb Elem 2: " + combination[2]);
         System.out.println("Comb Elem 3: " + combination[3] + "\n");
+    }
+
+    public JFrame getWindow()
+    {
+        return window;
     }
 
 }
