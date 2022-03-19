@@ -4,17 +4,19 @@ public class End
 {
     JFrame endFrame;
     JPanel endPanel;
-    JLabel endLabel;
+    JLabel label;
 
-    public End()
+    Gui gui = new Gui();
+
+    public JFrame win()
     {
-        endFrame = new JFrame("You ran out of guesses :(");
+        gui.getWindow().dispose();
+
+        endFrame = new JFrame("Congratulations!");
+
         endPanel = new JPanel();
-        endLabel = new JLabel("You ran out of guesses :(");
 
         endFrame.setContentPane(endPanel);
-
-        endPanel.add(endLabel);
 
         endFrame.setSize(500, 100);
 
@@ -23,5 +25,40 @@ public class End
         endFrame.setVisible(true);
 
         endFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        
+        label = new JLabel("Well done! You won in " + (gui.lineCounter + 1) + " Guesses!");
+
+        label.setSize(300, 300);
+
+        endPanel.add(label);
+
+        return endFrame;
+    }
+
+    public JFrame lose()
+    {
+        gui.getWindow().dispose();
+
+        endFrame = new JFrame("Better luck next time!");
+
+        endPanel = new JPanel();
+
+        endFrame.setContentPane(endPanel);
+
+        endFrame.setSize(500, 100);
+
+        endFrame.setLocation(500, 100);
+
+        endFrame.setVisible(true);
+
+        endFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        
+        label = new JLabel("You ran out of guesses :(");
+
+        label.setSize(300, 300);
+
+        endPanel.add(label);
+
+        return endFrame;
     }
 }
