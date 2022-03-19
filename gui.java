@@ -5,8 +5,10 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
+import java.util.Set;
 
 public class Gui implements ActionListener
 {                                                                                                      // Declaring the basis of the GUI window:
@@ -56,12 +58,13 @@ public class Gui implements ActionListener
     int guessCounter = 0;
     int counter = 0;
     int checkCounter = 0;
+    int rightCol = 0;
+    int buffer = 0;
 
-    int guessArray[] = new int[4];
-    int combination[] = new int[4];
+    Integer guessArray[] = new Integer[4];
+    Integer combination[] = new Integer[4];
 
-    int tempGuess[] = new int[4];
-    int tempComb[] = new int[4];
+    int arrayLength = guessArray.length;
 
     public Gui()
     {
@@ -279,106 +282,87 @@ public class Gui implements ActionListener
 
     public void colourChecker()
     {
-        if(rowArray[lineCounter].gridButton[checkCounter].getIcon() == blackTickImage)
+        for(int dc = 0; dc < arrayLength; dc++)
         {
-            //do nothing
-        }
-
-        for(int cc = 0; cc < 4; cc++)
-        {
-            if(guessArray[0] != combination[0] && guessArray[0] == combination[cc])
+            for(int i = dc + 1; i < arrayLength; i++)
             {
-                rowArray[lineCounter].gridButton[checkCounter].setIcon(whiteTickImage);
-                checkCounter++;
-                System.out.println("0 is in the array");
-            }
-
-            if(guessArray[1] != combination[1] && guessArray[1] == combination[cc])
-            {
-                if(guessArray[1] == guessArray[0])
+                if(combination[dc].equals(combination[i]))
                 {
-                    //do nothing
-                }
-
-                else
-                {
-                    rowArray[lineCounter].gridButton[checkCounter].setIcon(whiteTickImage);
-                    checkCounter++;
-                    System.out.println("1 is in the array");
-                }
-            }
-
-            if(guessArray[2] != combination[2] && guessArray[2] == combination[cc])
-            {
-                if(guessArray[2] == guessArray[0] || guessArray[2] == guessArray[1])
-                {
-                    //do nothing
-                }
-
-                else
-                {
-                    rowArray[lineCounter].gridButton[checkCounter].setIcon(whiteTickImage);
-                    checkCounter++;
-                    System.out.println("2 is in the array");
-                }
-            }
-
-            if(guessArray[3] != combination[3] && guessArray[3] == combination[cc])
-            {
-                if(guessArray[3] == guessArray[0] || guessArray[3] == guessArray[1] || guessArray[3] == guessArray[2])
-                {
-                    //do nothing
-                }
-
-                else
-                {
-                    rowArray[lineCounter].gridButton[checkCounter].setIcon(whiteTickImage);
-                    checkCounter++;
-                    System.out.println("3 is in the array");
+                    buffer++;
                 }
             }
         }
-        if(guessCounter == 4)
+
+        Set<Integer> tempGuess = new HashSet<>(Arrays.asList(guessArray));
+        
+        for(int c = 0; c < arrayLength; c++)
         {
-            checkCounter = 0;
+            if(tempGuess.contains(combination[c]))
+            {
+                rightCol++;
+                counter++;
+            }
         }
-    }
 
-    public void posChecker()
-    {
-            if(guessArray[0] == combination[0])
-            {
-                rowArray[lineCounter].gridButton[checkCounter].setIcon(blackTickImage);
-                checkCounter++;
-            }
+        for(int p = 0; p < ((rightCol - buffer) + counter); p++)
+        {
+            rowArray[lineCounter].gridButton[checkCounter].setIcon(whiteTickImage);
 
-            if(guessArray[1] == combination[1])
-            {
-                rowArray[lineCounter].gridButton[checkCounter].setIcon(blackTickImage);
-                checkCounter++;
-            }
-
-            if(guessArray[2] == combination[2])
-            {
-                rowArray[lineCounter].gridButton[checkCounter].setIcon(blackTickImage);
-                checkCounter++;
-            }
-
-            if(guessArray[3] == combination[3])
-            {
-                rowArray[lineCounter].gridButton[checkCounter].setIcon(blackTickImage);
-                checkCounter++;
-            }
-
-            else
-            {
-                colourChecker();
-            }
+            System.out.println(tempGuess);
+        }
 
             if(guessCounter == 4)
             {
                 checkCounter = 0;
             }
+    }
+
+
+    public void posChecker()
+    {
+        if(guessArray[0] == combination[0])
+        {
+            rowArray[lineCounter].gridButton[checkCounter].setIcon(blackTickImage);
+            checkCounter++;
+            buffer++;
+            counter++;
+            guessArray[0] = 7;
+            
+        }
+
+        if(guessArray[1] == combination[1])
+        {
+            rowArray[lineCounter].gridButton[checkCounter].setIcon(blackTickImage);
+            checkCounter++;
+            buffer++;
+            counter++;
+            guessArray[1] = 7;
+        }
+
+        if(guessArray[2] == combination[2])
+        {
+            rowArray[lineCounter].gridButton[checkCounter].setIcon(blackTickImage);
+            checkCounter++;
+            buffer++;
+            counter++;
+            guessArray[2] = 7;
+        }
+
+        if(guessArray[3] == combination[3])
+        {
+            rowArray[lineCounter].gridButton[checkCounter].setIcon(blackTickImage);
+            checkCounter++;
+            buffer++;
+            counter++;
+            guessArray[3] = 7;
+        }
+
+        colourChecker();
+
+        if(guessCounter == 4)
+        {
+            checkCounter = 0;
+        }
     }
 
     public void codeGen()
