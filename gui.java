@@ -1,3 +1,4 @@
+import javax.lang.model.util.ElementScanner14;
 import javax.sql.RowSetEvent;
 import javax.swing.*;
 import javax.swing.plaf.DimensionUIResource;
@@ -5,6 +6,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
@@ -55,12 +57,15 @@ public class Gui implements ActionListener
     private int lineCounter = 0;
     private int guessCounter = 0;
     private int counter = 0;
-    private int checkCounter = 0;
-    private int rightCol = 0;
+    private int whiteCounter = 0;
     private int buffer = 0;
+    private int checkCounter = 0;
+    private int blackCounter = 0;
 
     Integer guessArray[] = new Integer[4];
     Integer combination[] = new Integer[4];
+
+    List<Integer> whiteList = new ArrayList<>();
 
     private int arrayLength = guessArray.length;
 
@@ -255,88 +260,60 @@ public class Gui implements ActionListener
         }
     }
 
-    public void colourChecker()
+    public void posChecker()
     {
-        for(int dc = 0; dc < arrayLength; dc++)
+        List<Integer> guessList = new ArrayList<>(Arrays.asList(guessArray));
+        List<Integer> combList = new ArrayList<>(Arrays.asList(combination));
+
+        whiteList.clear();
+
+        for(int i = 0; i < arrayLength; i++)
         {
-            for(int i = dc + 1; i < arrayLength; i++)
+            if(guessList.contains(combination[i]))
             {
-                if(combination[dc].equals(combination[i]))
+                if(guessArray[i] == combination[i])
                 {
+                    guessArray[i] = 7;
+                    blackCounter++;
                     buffer++;
+                }
+                else if(guessArray[i] != combination[i])
+                {
+                    whiteList.add(i);
                 }
             }
         }
 
-        Set<Integer> tempGuess = new HashSet<>(Arrays.asList(guessArray));
-        
-        for(int c = 0; c < arrayLength; c++)
+        Set<Integer> whiteCountSet = new HashSet<>(whiteList);
+
+        whiteCounter = whiteCountSet.size() - buffer;
+
+        for(int b = 0; b < blackCounter; b++)
         {
-            if(tempGuess.contains(combination[c]))
-            {
-                rightCol++;
-                counter++;
-            }
+            rowArray[lineCounter].gridButton[checkCounter].setIcon(blackTickImage);
+            checkCounter++;
+            System.out.println(guessArray[b]);
         }
 
-        for(int p = 0; p < (rightCol - buffer); p++)
+        for(int w = 0; w < whiteCounter; w++)
         {
             rowArray[lineCounter].gridButton[checkCounter].setIcon(whiteTickImage);
-
-            System.out.println(tempGuess);
-        }
-
-            if(guessCounter == 4)
-            {
-                checkCounter = 0;
-            }
-    }
-
-
-    public void posChecker()
-    {
-        if(guessArray[0] == combination[0])
-        {
-            rowArray[lineCounter].gridButton[checkCounter].setIcon(blackTickImage);
             checkCounter++;
-            buffer++;
-            counter++;
-            guessArray[0] = 7;
         }
 
-        if(guessArray[1] == combination[1])
-        {
-            rowArray[lineCounter].gridButton[checkCounter].setIcon(blackTickImage);
-            checkCounter++;
-            buffer++;
-            counter++;
-            guessArray[1] = 7;
-        }
-
-        if(guessArray[2] == combination[2])
-        {
-            rowArray[lineCounter].gridButton[checkCounter].setIcon(blackTickImage);
-            checkCounter++;
-            buffer++;
-            counter++;
-            guessArray[2] = 7;
-        }
-
-        if(guessArray[3] == combination[3])
-        {
-            rowArray[lineCounter].gridButton[checkCounter].setIcon(blackTickImage);
-            checkCounter++;
-            buffer++;
-            counter++;
-            guessArray[3] = 7;
-        }
-
-        colourChecker();
-
-        if(guessCounter == 4)
+        if(guessCounter > 3)
         {
             checkCounter = 0;
+            buffer = 0;
+            whiteCounter = 0;
+            blackCounter = 0;
+            whiteList.clear();
         }
+    }
+
+    public void colourCheck()
+    {
+        
     }
 
     public void codeGen()
