@@ -1,12 +1,8 @@
-import javax.lang.model.util.ElementScanner14;
-import javax.sql.RowSetEvent;
 import javax.swing.*;
-import javax.swing.plaf.DimensionUIResource;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
@@ -29,7 +25,7 @@ public class Gui implements ActionListener
     private Row row4 = new Row();
     private Row row5 = new Row();
 
-    Row[] rowArray = new Row[6];                                                                       // Creating an array for the 6 rows
+    private Row[] rowArray = new Row[6];                                                               // Creating an array for the 6 rows
 
 
     private Picture red = new Picture("Colour_0.png");
@@ -39,9 +35,9 @@ public class Gui implements ActionListener
     private Picture blue = new Picture("Colour_4.png");
     private Picture indigo = new Picture("Colour_5.png");
     private Picture violet = new Picture("Colour_6.png");
-    private Picture emptyImage = new Picture("Empty.png");
     private Picture whiteTickImage = new Picture("Score_1.png");
     private Picture blackTickImage = new Picture("Score_0.png");
+
     private Picture[] colourArr = new Picture[7];
 
 
@@ -58,14 +54,14 @@ public class Gui implements ActionListener
     private int guessCounter = 0;
     private int counter = 0;
     private int whiteCounter = 0;
-    private int buffer = 0;
     private int checkCounter = 0;
     private int blackCounter = 0;
+    private int buffer = 0;
 
-    Integer guessArray[] = new Integer[4];
-    Integer combination[] = new Integer[4];
+    private Integer guessArray[] = new Integer[4];
+    private Integer combination[] = new Integer[4];
 
-    List<Integer> whiteList = new ArrayList<>();
+    private List<Integer> whiteList = new ArrayList<>();
 
     private int arrayLength = guessArray.length;
 
@@ -163,7 +159,7 @@ public class Gui implements ActionListener
         if(e.getSource() == r)
         {
             guessArray[guessCounter] = 0;
-            rowArray[lineCounter].rowButton[guessCounter].setIcon(colourArr[0]);
+            rowArray[lineCounter].getRowButton()[guessCounter].setIcon(colourArr[0]);
             guessCounter++;
             counter++;
         }
@@ -171,7 +167,7 @@ public class Gui implements ActionListener
         if(e.getSource() == o)
         {
             guessArray[guessCounter] = 1;
-            rowArray[lineCounter].rowButton[guessCounter].setIcon(colourArr[1]);
+            rowArray[lineCounter].getRowButton()[guessCounter].setIcon(colourArr[1]);
             guessCounter++;
             counter++;
         }
@@ -179,7 +175,7 @@ public class Gui implements ActionListener
         if(e.getSource() == y)
         {
             guessArray[guessCounter] = 2;
-            rowArray[lineCounter].rowButton[guessCounter].setIcon(colourArr[2]);
+            rowArray[lineCounter].getRowButton()[guessCounter].setIcon(colourArr[2]);
             guessCounter++;
             counter++;
         }
@@ -187,7 +183,7 @@ public class Gui implements ActionListener
         if(e.getSource() == g)
         {
             guessArray[guessCounter] = 3;
-            rowArray[lineCounter].rowButton[guessCounter].setIcon(colourArr[3]);
+            rowArray[lineCounter].getRowButton()[guessCounter].setIcon(colourArr[3]);
             guessCounter++;
             counter++;
         }
@@ -195,7 +191,7 @@ public class Gui implements ActionListener
         if(e.getSource() == b)
         {
             guessArray[guessCounter] = 4;
-            rowArray[lineCounter].rowButton[guessCounter].setIcon(colourArr[4]);
+            rowArray[lineCounter].getRowButton()[guessCounter].setIcon(colourArr[4]);
             guessCounter++;
             counter++;
         }
@@ -203,7 +199,7 @@ public class Gui implements ActionListener
         if(e.getSource() == i)
         {
             guessArray[guessCounter] = 5;
-            rowArray[lineCounter].rowButton[guessCounter].setIcon(colourArr[5]);
+            rowArray[lineCounter].getRowButton()[guessCounter].setIcon(colourArr[5]);
             guessCounter++;
             counter++;
         }
@@ -211,7 +207,7 @@ public class Gui implements ActionListener
         if(e.getSource() == v)
         {
             guessArray[guessCounter] = 6;
-            rowArray[lineCounter].rowButton[guessCounter].setIcon(colourArr[6]);
+            rowArray[lineCounter].getRowButton()[guessCounter].setIcon(colourArr[6]);
             guessCounter++;
             counter++;
         }
@@ -240,7 +236,7 @@ public class Gui implements ActionListener
         {
             for(int j = 0; j < 4; j++)
             {
-                rowArray[lineCounter].gridButton[j].setIcon(blackTickImage);
+                rowArray[lineCounter].getGridButton()[j].setIcon(blackTickImage);
             }
 
             End w = new End();
@@ -287,24 +283,23 @@ public class Gui implements ActionListener
 
         Set<Integer> whiteCountSet = new HashSet<>(whiteList);
 
-        whiteCounter = whiteCountSet.size();
+        whiteCounter = whiteCountSet.size() - buffer;
 
         for(int b = 0; b < blackCounter; b++)
         {
-            rowArray[lineCounter].gridButton[checkCounter].setIcon(blackTickImage);
+            rowArray[lineCounter].getGridButton()[checkCounter].setIcon(blackTickImage);
             checkCounter++;
         }
 
         for(int w = 0; w < whiteCounter; w++)
         {
-            rowArray[lineCounter].gridButton[checkCounter].setIcon(whiteTickImage);
+            rowArray[lineCounter].getGridButton()[checkCounter].setIcon(whiteTickImage);
             checkCounter++;
         }
 
         if(guessCounter > 3)
         {
             checkCounter = 0;
-            buffer = 0;
             whiteCounter = 0;
             blackCounter = 0;
             whiteList.clear();
@@ -324,6 +319,8 @@ public class Gui implements ActionListener
         System.out.println("Comb Elem 1: " + combination[1]);
         System.out.println("Comb Elem 2: " + combination[2]);
         System.out.println("Comb Elem 3: " + combination[3] + "\n");
+
+        
     }
 
     public JFrame getWindow()
