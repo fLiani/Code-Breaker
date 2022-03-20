@@ -264,6 +264,7 @@ public class Gui implements ActionListener
     {
         List<Integer> guessList = new ArrayList<>(Arrays.asList(guessArray));
         List<Integer> combList = new ArrayList<>(Arrays.asList(combination));
+        Set<Integer> guessSet = new HashSet<>(Arrays.asList(guessArray));
 
         whiteList.clear();
 
@@ -277,22 +278,21 @@ public class Gui implements ActionListener
                     blackCounter++;
                     buffer++;
                 }
-                else if(guessArray[i] != combination[i])
+                else if(guessArray[i] != combination[i] && guessSet.contains(combination[i]))
                 {
-                    whiteList.add(i);
+                    whiteList.add(guessList.get(i));
                 }
             }
         }
 
         Set<Integer> whiteCountSet = new HashSet<>(whiteList);
 
-        whiteCounter = whiteCountSet.size() - buffer;
+        whiteCounter = whiteCountSet.size();
 
         for(int b = 0; b < blackCounter; b++)
         {
             rowArray[lineCounter].gridButton[checkCounter].setIcon(blackTickImage);
             checkCounter++;
-            System.out.println(guessArray[b]);
         }
 
         for(int w = 0; w < whiteCounter; w++)
@@ -309,11 +309,6 @@ public class Gui implements ActionListener
             blackCounter = 0;
             whiteList.clear();
         }
-    }
-
-    public void colourCheck()
-    {
-        
     }
 
     public void codeGen()
