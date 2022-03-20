@@ -1,6 +1,5 @@
 import java.awt.*;
 import javax.swing.*;
-import javax.swing.text.AttributeSet.ColorAttribute;
 
 public class Row
 {
@@ -11,9 +10,8 @@ public class Row
 
     private Picture empty = new Picture("Empty.png");
 
-    JButton[] rowButton = new JButton[4];
-
-    JButton[] gridButton = new JButton[4];
+    private JButton[] rowButton = new JButton[4];
+    private JButton[] gridButton = new JButton[4];
 
     public Row()
     {
@@ -48,5 +46,15 @@ public class Row
     public JPanel getLink()
     {
         return link;
+    }
+
+    public JButton[] getRowButton()
+    {
+        return rowButton;
+    }
+
+    public JButton[] getGridButton()
+    {
+        return gridButton;
     }
 }
