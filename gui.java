@@ -13,7 +13,6 @@ import java.util.Set;
  * Creates the whole game.
  * Action Listener class.
  */
-
 public class Gui implements ActionListener
 {
     // Declaring the basis of the GUI window:
@@ -95,7 +94,6 @@ public class Gui implements ActionListener
      * @param i Indigo.
      * @param v Violet.
      */
-
     public Gui()
     {
         // Creating instances of all the JPanels and JFrame needed:
@@ -218,7 +216,6 @@ public class Gui implements ActionListener
      * @param counter Duplicate counter of guessCounter to avoid errors.
      * @param lineCounter Counter to keep track of which row the user is on. (lineCounter++ moves to next line).
      */
-
     public void actionPerformed(ActionEvent e)
     {
         if(e.getSource() == r)
@@ -319,7 +316,6 @@ public class Gui implements ActionListener
      * @param w Instance of the End class which ends the game and displays winning message to the user.
      * @param l Instance of the End class which ends the game and displays losing message to the user.
      */
-
     public void winChecker()
     {
         // If the guess entered is the same as the combination -- end the game and display winning message.
@@ -361,7 +357,6 @@ public class Gui implements ActionListener
      * @param buffer A counter to take away from the correct colour if the colour is already counted as a black tick.
      * @param whiteCounter Counter to keep track of how many white single ticks are achieved.
      */
-
     public void checker()
     {
         // Declaring a list and a set to display the guesses:
@@ -422,7 +417,6 @@ public class Gui implements ActionListener
      * @param r Random number instance.
      * @param combination Integer array where the random code is stored.
      */
-
     public void codeGen()
     {
         Random r = new Random();
