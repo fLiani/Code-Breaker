@@ -2,11 +2,11 @@ import javax.swing.*;
 
 public class End 
 {
-    JFrame endFrame;
-    JPanel endPanel;
-    JLabel label;
+    private JFrame endFrame;
+    private JPanel endPanel;
+    private JLabel label;
 
-    Gui gui = new Gui();
+    private Gui gui = new Gui();
 
     public JFrame win()
     {
@@ -26,7 +26,7 @@ public class End
 
         endFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
-        label = new JLabel("Well done! You won in " + (gui.lineCounter + 1) + " Guesses!");
+        label = new JLabel("Well done! You Broke The Code!");
 
         label.setSize(300, 300);
 
