@@ -81,7 +81,7 @@ public class Gui implements ActionListener
     private int buffer = 0;
 
     /**
-     * Creates a blank template of the game and generates a random code to break.
+     * GUI Constructor - creates a blank template of the game and generates a random code to break.
      * @param mainPanel
      * @param window The main frame of the program.
      * @param colourMenu The menu with all the colours to chose from to break the code at the bottom of the screen.
