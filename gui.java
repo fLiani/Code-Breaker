@@ -1,9 +1,3 @@
-/**
- * Gui class is the main functioning class of the program.
- * Creates the whole game.
- * Action Listener class.
- */
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -13,6 +7,12 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
 import java.util.Set;
+
+/**
+ * Gui class is the main functioning class of the program.
+ * Creates the whole game.
+ * Action Listener class.
+ */
 
 public class Gui implements ActionListener
 {
