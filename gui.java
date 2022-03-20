@@ -40,7 +40,6 @@ public class Gui implements ActionListener
     private Picture emptyImage = new Picture("Empty.png");
     private Picture whiteTickImage = new Picture("Score_1.png");
     private Picture blackTickImage = new Picture("Score_0.png");
-
     private Picture[] colourArr = new Picture[7];
 
 
@@ -52,19 +51,18 @@ public class Gui implements ActionListener
     private JButton i = new JButton(indigo);
     private JButton v = new JButton(violet);
 
-    int btnSize = 65;
-
-    int lineCounter = 0;
-    int guessCounter = 0;
-    int counter = 0;
-    int checkCounter = 0;
-    int rightCol = 0;
-    int buffer = 0;
+    private int btnSize = 65;
+    private int lineCounter = 0;
+    private int guessCounter = 0;
+    private int counter = 0;
+    private int checkCounter = 0;
+    private int rightCol = 0;
+    private int buffer = 0;
 
     Integer guessArray[] = new Integer[4];
     Integer combination[] = new Integer[4];
 
-    int arrayLength = guessArray.length;
+    private int arrayLength = guessArray.length;
 
     public Gui()
     {
@@ -163,10 +161,6 @@ public class Gui implements ActionListener
             rowArray[lineCounter].rowButton[guessCounter].setIcon(colourArr[0]);
             guessCounter++;
             counter++;
-            System.out.println("Element 0 " + guessArray[0]);
-            System.out.println("Element 1 " + guessArray[1]);
-            System.out.println("Element 2 " + guessArray[2]);
-            System.out.println("Element 3 " + guessArray[3]);
         }
 
         if(e.getSource() == o)
@@ -175,10 +169,6 @@ public class Gui implements ActionListener
             rowArray[lineCounter].rowButton[guessCounter].setIcon(colourArr[1]);
             guessCounter++;
             counter++;
-            System.out.println("Element 0 " + guessArray[0]);
-            System.out.println("Element 1 " + guessArray[1]);
-            System.out.println("Element 2 " + guessArray[2]);
-            System.out.println("Element 3 " + guessArray[3]);
         }
 
         if(e.getSource() == y)
@@ -187,10 +177,6 @@ public class Gui implements ActionListener
             rowArray[lineCounter].rowButton[guessCounter].setIcon(colourArr[2]);
             guessCounter++;
             counter++;
-            System.out.println("Element 0 " + guessArray[0]);
-            System.out.println("Element 1 " + guessArray[1]);
-            System.out.println("Element 2 " + guessArray[2]);
-            System.out.println("Element 3 " + guessArray[3]);
         }
 
         if(e.getSource() == g)
@@ -199,10 +185,6 @@ public class Gui implements ActionListener
             rowArray[lineCounter].rowButton[guessCounter].setIcon(colourArr[3]);
             guessCounter++;
             counter++;
-            System.out.println("Element 0 " + guessArray[0]);
-            System.out.println("Element 1 " + guessArray[1]);
-            System.out.println("Element 2 " + guessArray[2]);
-            System.out.println("Element 3 " + guessArray[3]);
         }
 
         if(e.getSource() == b)
@@ -211,10 +193,6 @@ public class Gui implements ActionListener
             rowArray[lineCounter].rowButton[guessCounter].setIcon(colourArr[4]);
             guessCounter++;
             counter++;
-            System.out.println("Element 0 " + guessArray[0]);
-            System.out.println("Element 1 " + guessArray[1]);
-            System.out.println("Element 2 " + guessArray[2]);
-            System.out.println("Element 3 " + guessArray[3]);
         }
 
         if(e.getSource() == i)
@@ -223,10 +201,6 @@ public class Gui implements ActionListener
             rowArray[lineCounter].rowButton[guessCounter].setIcon(colourArr[5]);
             guessCounter++;
             counter++;
-            System.out.println("Element 0 " + guessArray[0]);
-            System.out.println("Element 1 " + guessArray[1]);
-            System.out.println("Element 2 " + guessArray[2]);
-            System.out.println("Element 3 " + guessArray[3]);
         }
 
         if(e.getSource() == v)
@@ -235,10 +209,6 @@ public class Gui implements ActionListener
             rowArray[lineCounter].rowButton[guessCounter].setIcon(colourArr[6]);
             guessCounter++;
             counter++;
-            System.out.println("Element 0 " + guessArray[0]);
-            System.out.println("Element 1 " + guessArray[1]);
-            System.out.println("Element 2 " + guessArray[2]);
-            System.out.println("Element 3 " + guessArray[3]);
         }
 
         if(counter > 3)
@@ -255,9 +225,7 @@ public class Gui implements ActionListener
 
         if(lineCounter > 5)
         {
-            End endGame = new End();
-            window.dispose();
-            endGame.lose();
+            winChecker();
         }
     }
 
@@ -274,6 +242,13 @@ public class Gui implements ActionListener
 
             w.win();
         }
+        else if(lineCounter > 5 && Arrays.equals(guessArray, combination) != true)
+        {
+            End l = new End();
+            window.dispose();
+            l.lose();
+        }
+
         else if(Arrays.equals(guessArray, combination) == false)
         {
             posChecker();
@@ -304,7 +279,7 @@ public class Gui implements ActionListener
             }
         }
 
-        for(int p = 0; p < ((rightCol - buffer) + counter); p++)
+        for(int p = 0; p < (rightCol - buffer); p++)
         {
             rowArray[lineCounter].gridButton[checkCounter].setIcon(whiteTickImage);
 
@@ -327,7 +302,6 @@ public class Gui implements ActionListener
             buffer++;
             counter++;
             guessArray[0] = 7;
-            
         }
 
         if(guessArray[1] == combination[1])
@@ -383,6 +357,11 @@ public class Gui implements ActionListener
     public JFrame getWindow()
     {
         return window;
+    }
+
+    public int getLineCounter()
+    {
+        return lineCounter;
     }
 
 }
