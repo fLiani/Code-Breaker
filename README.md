@@ -1,4 +1,4 @@
-# javaCourseworkY1
+# Code Breaker Game
 Code Breaker coursework in Java (Year 1)
 
 This my take on the code breaker game.
